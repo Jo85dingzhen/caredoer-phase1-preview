@@ -1,6 +1,6 @@
 :root {
-  --paper: #f6f4ef;
-  --white: #fffefa;
+  --paper: #faf9f6;
+  --white: #fff;
   --ink: #182631;
   --muted: #4c5c69;
   --accent: #27465e;
@@ -23,54 +23,43 @@ button { cursor: pointer; }
 h1, h2, h3, p { margin: 0; }
 h1, h2, h3 { font-family: var(--heading); }
 p { line-height: 1.65; }
-.shell { width: min(1160px, calc(100% - 64px)); margin-inline: auto; }
+.shell { width: min(1080px, calc(100% - 64px)); margin-inline: auto; }
 .masthead { background: var(--white); border-bottom: 1px solid var(--line); }
 .header-inner, .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.header-inner { min-height: 70px; }
-.brand { text-decoration: none; font: 700 25px "Manrope", "Avenir Next", sans-serif; letter-spacing: -.05em; white-space: nowrap; }
-.brand-mark { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 5px; background: var(--accent); color: var(--white); margin-right: 4px; font-size: 19px; vertical-align: 2px; }
+.header-inner { min-height: 62px; }
+.brand { text-decoration: none; font: 700 25px "Manrope", "Avenir Next", sans-serif; letter-spacing: -.025em; white-space: nowrap; }
 nav { display: flex; flex-wrap: wrap; gap: clamp(12px, 3vw, 28px); align-items: center; font-size: 14px; }
 nav a, .text-button { text-decoration: none; }
 nav a:hover, .text-button:hover { text-decoration: underline; }
 .text-button { background: none; border: 0; padding: 0; color: inherit; }
-.hero { background: var(--paper); color: var(--ink); }
-.hero-inner { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(36px, 7vw, 100px); align-items: center; padding-block: 48px; }
-.eyebrow { color: var(--accent); font-size: 14px; }
-h1 { font-weight: 800; font-size: clamp(40px, 5.2vw, 65px); letter-spacing: -.04em; line-height: 1.18; margin-block: 16px; }
-.hero-copy { color: var(--muted); max-width: 28em; margin-bottom: 24px; }
 .button { display: inline-flex; gap: 12px; align-items: center; justify-content: center; text-decoration: none; border: 1px solid transparent; border-radius: 6px; padding: 10px 15px; min-height: 42px; font-size: 14px; font-weight: 700; }
-.button-main { background: var(--accent); color: var(--white); }
-.button-main:hover { background: var(--accent-dark); }
 .button-secondary { background: var(--accent); color: white; }
 .button-secondary:hover { background: var(--accent-dark); }
 .button-outline { color: var(--accent); background: var(--white); border-color: var(--line); }
 .button-outline:hover { background: var(--tint); }
-.pathway { margin: 0; padding: 8px 25px; list-style: none; border: 1px solid var(--line); border-radius: 6px; background: var(--white); }
-.pathway li { display: grid; grid-template-columns: 46px 1fr; gap: 9px; align-items: center; padding: 14px 0; }
-.pathway li + li { border-top: 1px solid var(--line); }
-.pathway li > span { font-size: 14px; font-variant-numeric: tabular-nums; color: var(--accent); }
-.pathway small { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; line-height: 1.5; }
-.preview-strip { color: var(--muted); background: #eeede8; border-block: 1px solid var(--line); font-size: 13px; }
-.preview-strip .shell { display: flex; gap: 12px; align-items: baseline; padding-block: 10px; }
-.preview-strip strong { white-space: nowrap; }
-.section { padding-block: 47px 53px; scroll-margin-top: 18px; }
-.section-head { display: flex; justify-content: space-between; align-items: end; gap: 12px; margin-bottom: 20px; }
-h2 { font-size: clamp(25px, 3.2vw, 36px); letter-spacing: -.05em; }
-.section-head p { color: var(--muted); margin-top: 6px; }
+.section { padding-block: 34px 42px; scroll-margin-top: 18px; }
+h1 { font-size: clamp(32px, 4vw, 46px); line-height: 1.22; }
+h2 { font-size: 22px; line-height: 1.35; }
+.directory-heading { margin-bottom: 27px; }
+.scope { margin-bottom: 6px; color: var(--muted); font-size: 13px; }
+.intro { color: var(--muted); margin-top: 8px; }
+.list-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 11px; }
 .count { white-space: nowrap; font-size: 14px; color: var(--muted); }
-.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-.filter { min-height: 39px; padding: 6px 13px; border: 1px solid var(--line); border-radius: 5px; color: var(--accent); background: var(--white); }
-.filter[aria-pressed="true"] { background: var(--accent); color: white; border-color: var(--accent); }
+.filters { display: flex; flex-wrap: wrap; column-gap: 20px; border-bottom: 1px solid var(--line); margin-bottom: 15px; }
+.filter { min-height: 42px; padding: 5px 0; border: 0; border-bottom: 2px solid transparent; color: var(--muted); background: transparent; font-size: 14px; }
+.filter:hover, .filter[aria-pressed="true"] { color: var(--accent); }
+.filter[aria-pressed="true"] { border-bottom-color: var(--accent); font-weight: 700; }
 .role-layout { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 18px; align-items: start; }
-.role-list { max-height: 625px; overflow: auto; padding: 4px; border: 1px solid var(--line); background: var(--white); border-radius: 8px; }
-.role-button { display: grid; width: 100%; grid-template-columns: 32px minmax(0, 1fr); align-items: center; text-align: left; padding: 10px; gap: 6px; border: 0; border-radius: 5px; background: transparent; color: var(--ink); }
+.role-list { max-height: 625px; overflow: auto; border: 1px solid var(--line); background: var(--white); border-radius: 4px; }
+.role-button { display: grid; width: 100%; grid-template-columns: 32px minmax(0, 1fr); align-items: center; text-align: left; padding: 10px 12px; gap: 6px; border: 0; background: transparent; color: var(--ink); }
+.role-button + .role-button { border-top: 1px solid var(--line); }
 .role-button:hover, .role-button[aria-pressed="true"] { background: var(--tint); }
 .role-button[aria-pressed="true"] { box-shadow: inset 3px 0 var(--accent); }
 .role-button:focus-visible { outline-offset: -3px; }
 .role-button > span:first-child { color: var(--accent); font-variant-numeric: tabular-nums; font-size: 13px; }
 .role-button b, .role-button small { display: block; }
 .role-button small { margin-top: 3px; font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
-.role-detail { padding: clamp(17px, 3vw, 32px); border: 1px solid var(--line); border-radius: 8px; background: var(--white); }
+.role-detail { padding: clamp(17px, 3vw, 32px); border: 1px solid var(--line); border-radius: 4px; background: var(--white); }
 .role-detail .meta { color: var(--accent); font-size: 13px; margin-bottom: 6px; }
 .role-detail h3 { font-size: clamp(24px, 3.2vw, 35px); line-height: 1.22; }
 .role-summary { margin-top: 8px; color: var(--muted); }
@@ -80,12 +69,13 @@ h2 { font-size: clamp(25px, 3.2vw, 36px); letter-spacing: -.05em; }
 .role-courses { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 9px; }
 .role-courses button { min-height: 37px; padding: 5px 9px; border: 1px solid #c8d2da; border-radius: 5px; background: #eef2f4; color: var(--accent); font-size: 13px; }
 .role-detail > .button { margin-top: 14px; }
-.courses-section { border-block: 1px solid var(--line); background: #eeefeb; }
-.course-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.course-card { display: flex; flex-direction: column; align-items: start; gap: 9px; padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--white); }
-.course-card h3 { font-size: 19px; line-height: 1.45; }
-.course-card p { font-size: 14px; color: var(--muted); margin-bottom: 4px; }
-.course-card .button { margin-top: auto; }
+.courses-section { border-block: 1px solid var(--line); background: var(--white); }
+.courses-heading { margin-bottom: 13px; }
+.course-list { border-top: 1px solid var(--line); }
+.course-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(105px, auto) minmax(140px, auto); align-items: center; gap: 14px; padding-block: 13px; border-bottom: 1px solid var(--line); }
+.course-row h3 { font-size: 16px; line-height: 1.4; }
+.course-row p { font-size: 14px; color: var(--muted); margin-top: 3px; }
+.course-row .button { justify-self: end; }
 .status { color: var(--accent); font-size: 13px; font-weight: 600; }
 footer { padding-block: 20px; color: var(--muted); font-size: 13px; }
 dialog { width: min(700px, calc(100% - 28px)); max-height: calc(100% - 40px); color: var(--ink); background: var(--white); padding: 20px; border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 55px #192e4038; }
@@ -99,6 +89,7 @@ form { display: grid; gap: 13px; }
 .field input, select { width: 100%; min-height: 42px; background: white; color: var(--ink); border: 1px solid #a2adb5; border-radius: 5px; padding: 7px 9px; }
 .check { display: flex; align-items: start; gap: 8px; line-height: 1.5; font-size: 14px; }
 .check input { width: 17px; height: 17px; flex: 0 0 17px; }
+.demo-note { color: var(--muted); font-size: 13px; }
 .form-message { color: #7d4523; font-size: 14px; }
 .actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .record-list { list-style: none; padding: 0; margin: 12px 0 0; }
@@ -107,15 +98,18 @@ form { display: grid; gap: 13px; }
 .record-list .actions { margin-top: 5px; }
 @media (max-width: 760px) {
   .shell { width: calc(100% - 32px); }
-  .hero-inner { grid-template-columns: 1fr; gap: 24px; padding-block: 32px; }
   .role-layout { grid-template-columns: 1fr; }
-  .role-list { max-height: 225px; display: grid; grid-template-columns: 1fr 1fr; }
-  .course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .role-list { max-height: 210px; }
 }
 @media (max-width: 480px) {
-  .header-inner { padding-block: 12px; align-items: start; flex-direction: column; }
-  .section { padding-block: 32px; }
-  .course-grid { grid-template-columns: 1fr; }
+  .header-inner { min-height: 54px; padding-block: 8px; gap: 10px; }
+  .brand { font-size: 20px; }
+  nav { gap: 6px 10px; font-size: 12px; }
+  .section { padding-block: 24px 30px; }
+  .directory-heading { margin-bottom: 20px; }
+  .filters { column-gap: 14px; }
+  .course-row { grid-template-columns: 1fr auto; gap: 8px; }
+  .course-row > div { grid-column: 1 / -1; }
   .footer-inner { align-items: start; flex-direction: column; }
 }
 @media (prefers-reduced-motion: reduce) { :root { scroll-behavior: auto; } }

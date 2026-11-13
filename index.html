@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <title>CareDoer | 从岗位开始</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>岗位与培训 | CareDoer</title>
+  <link rel="stylesheet" href="styles.css?v=directory">
   <script defer src="data.js"></script>
-  <script defer src="app.js"></script>
+  <script defer src="app.js?v=directory"></script>
 </head>
 <body>
   <header class="masthead">
     <div class="shell header-inner">
-      <a class="brand" href="#top" aria-label="CareDoer 首页"><span class="brand-mark" aria-hidden="true">✚</span> CareDoer</a>
+      <a class="brand" href="#top" aria-label="CareDoer 首页">CareDoer</a>
       <nav aria-label="主导航">
         <a href="#roles">找岗位</a>
         <a href="#courses">首批课程</a>
@@ -21,26 +21,14 @@
     </div>
   </header>
   <main id="top">
-    <section class="hero">
-      <div class="shell hero-inner">
-        <div>
-          <p class="eyebrow">加州 · 第一阶段</p>
-          <h1>先选岗位，<br>再开始培训。</h1>
-          <p class="hero-copy">从你想做的工作出发，查对应的课程、完成后可获得的凭证，以及申请岗位或开工前要核验的条件。</p>
-          <a class="button button-main" href="#roles">查看第一阶段岗位 <span aria-hidden="true">↓</span></a>
-        </div>
-        <ol class="pathway" aria-label="从岗位到上岗的四步">
-          <li><span>01</span><div><b>了解工作场景</b><small>看岗位做什么、在哪里工作</small></div></li>
-          <li><span>02</span><div><b>完成对应培训</b><small>按岗位选课，查看开课状态</small></div></li>
-          <li><span>03</span><div><b>取得相应凭证</b><small>查看课程凭证和其他岗位资格</small></div></li>
-          <li><span>04</span><div><b>核验后进入下一步</b><small>由雇主或相应机构核验，按岗位申请或办理许可</small></div></li>
-        </ol>
+    <section id="roles" class="shell section directory" aria-labelledby="directory-title">
+      <div class="directory-heading">
+        <p class="scope">加州 / 第一阶段</p>
+        <h1 id="directory-title">岗位与培训</h1>
+        <p class="intro">选择岗位，查看对应课程、所需凭证和上岗步骤。</p>
       </div>
-    </section>
-    <div class="preview-strip"><div class="shell"><strong>演示站</strong><span>请使用示例姓名和邮箱。表单和订单仅供演示，记录保存在当前浏览器。</span></div></div>
-    <section id="roles" class="shell section">
-      <div class="section-head">
-        <div><h2>选一个岗位</h2><p>查看这个岗位的课程、凭证和上岗路径。</p></div>
+      <div class="list-heading">
+        <h2>岗位目录</h2>
         <output id="role-count" class="count" aria-live="polite"></output>
       </div>
       <div class="filters" id="role-filters" role="group" aria-label="按工作方向筛选"></div>
@@ -51,12 +39,12 @@
     </section>
     <section id="courses" class="section courses-section">
       <div class="shell">
-        <div class="section-head"><div><h2>首批课程</h2><p>查看班期、意向登记和现有课程入口。</p></div></div>
-        <div class="course-grid" id="course-grid"></div>
+        <h2 class="courses-heading">首批课程</h2>
+        <div class="course-list" id="course-grid"></div>
       </div>
     </section>
   </main>
-  <footer><div class="shell footer-inner"><span>CareDoer · ALLCPR</span><span>加州第一阶段 · 岗位培训演示</span></div></footer>
+  <footer><div class="shell footer-inner"><span>CareDoer · ALLCPR</span><span>演示站 · 测试记录保存在当前浏览器</span></div></footer>
   <dialog id="dialog" aria-labelledby="dialog-title">
     <div class="dialog-header"><h2 id="dialog-title"></h2><button class="close" id="close-dialog" type="button" aria-label="关闭">×</button></div>
     <div id="dialog-body"></div>

@@ -33,9 +33,9 @@ function drawDetail() {
     <p class="meta">岗位 ${role.id} · ${role.scene}</p>
     <h3 id="role-title" tabindex="-1">${role.title}</h3>
     <p class="role-summary"><span lang="en">${role.english}</span> · ${role.summary}</p>
-    <div class="step"><b>需要学什么</b><p>${role.training}</p><div class="role-courses">${training}</div></div>
-    <div class="step"><b>需要哪些凭证与资格</b><p>${role.credential}</p></div>
-    <div class="step"><b>培训后怎么上岗或开办</b><p>${role.nextStep}</p></div>
+    <div class="step"><b>相关培训</b><p>${role.training}</p><div class="role-courses">${training}</div></div>
+    <div class="step"><b>凭证与资格</b><p>${role.credential}</p></div>
+    <div class="step"><b>上岗或开办</b><p>${role.nextStep}</p></div>
     <button class="button button-secondary" type="button" data-role-interest="${role.id}">登记这个岗位的意向</button>`;
 }
 
@@ -69,6 +69,7 @@ function showForm(mode, courseId = '', roleId = '') {
     ${course ? `<p class="dialog-copy">${course.credential}</p>` : ''}
     ${role && course ? `<p class="dialog-copy">对应岗位 · ${role.title}</p>` : ''}
     <form id="preview-form">
+      <p class="demo-note">请使用示例姓名和邮箱。测试记录仅保存在当前浏览器。</p>
       <label class="field">测试姓名 <input name="name" required maxlength="100" autocomplete="off" placeholder="例如 Test Learner"></label>
       <label class="field">测试邮箱 <input name="email" type="email" required maxlength="160" autocomplete="off" placeholder="例如 learner@example.com"></label>
       ${registration ? `<label class="field">演示班次<select name="session" required><option value="">选择示例班次</option>${sessionOptions}</select></label>` : ''}
@@ -212,10 +213,12 @@ function downloadCsv(kind) {
 }
 
 get('course-grid').innerHTML = Object.entries(courses).map(([id, course]) => `
-  <article class="course-card">
+  <article class="course-row">
+    <div>
+      <h3>${course.title}</h3>
+      <p>${course.description}</p>
+    </div>
     <span class="status">${course.status}</span>
-    <h3>${course.title}</h3>
-    <p>${course.description}</p>
     <button type="button" class="button button-outline" data-course="${id}">${course.action}</button>
   </article>`
 ).join('');
