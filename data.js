@@ -266,21 +266,22 @@ const roles = [
 
 const courses = {
   pediatric: {
-    title: '托育儿科急救与 CPR',
-    status: '计划开班',
-    description: '8 小时 · 圣何塞。可用示例班次体验报名流程。正式班期、地点和费用以发布信息为准。',
-    credential: '完成后按适用授权签发课程凭证，具体名称和签发方以正式课程说明为准。',
-    action: '预览报名',
-    mode: 'registration',
+    title: '托育儿科急救、CPR 与 AED',
+    status: '开放报名',
+    description: '首班：2026 年 12 月 2 日（周三）上午 9:00 至下午 5:00（加州时间）· 8 小时 · $115 · San Jose',
+    enrollmentDetails: '1631 N First Street, Suite 200, San Jose, CA 95112',
+    credential: '课程结业证书（Certificate of Completion）由 ALLCPR 出具，附 EMSA 儿科急救和儿科 CPR 课程结业贴纸。',
+    action: '查看首班与报名',
+    links: [{ label: '前往 ALLCPR 正式报名', url: 'https://allcpr.enrollware.com/enroll?id=14894939' }],
     sessions: ['示例班次 A', '示例班次 B'],
   },
   phs: {
     title: '托育预防性健康与安全（PHS）',
-    status: '意向登记',
-    description: '8 小时 · 圣何塞。首班验收通过后开放正式报名。',
-    credential: '获准交付的课程完成证明由相应主体出具，公开凭证信息待确认。',
-    action: '登记开课意向',
+    status: '仅收意向',
+    description: '有兴趣参加托育预防性健康与安全课程？可在此预览意向登记。',
+    action: '查看意向登记',
     mode: 'interest',
+    interestOnly: true,
   },
   adult: {
     title: '成人急救／CPR／AED 与 BLS',

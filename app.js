@@ -54,7 +54,11 @@ function showCourse(id, roleId) {
   const links = (course.links || []).map(({ label, url }) =>
     `<a class="button button-secondary" href="${url}" target="_blank" rel="noopener noreferrer">${label} ↗</a>`
   ).join('');
-  showDialog(course.title, `<p class="dialog-copy">${course.description}</p><p class="dialog-copy">${course.credential}</p><div class="actions">${links}</div>`);
+  showDialog(course.title, `
+    <p class="dialog-copy">${course.description}</p>
+    ${course.enrollmentDetails ? `<p class="dialog-copy">上课地址 · ${course.enrollmentDetails}</p>` : ''}
+    <p class="dialog-copy">${course.credential}</p>
+    <div class="actions">${links}</div>`);
 }
 
 function showForm(mode, courseId = '', roleId = '') {
@@ -62,16 +66,17 @@ function showForm(mode, courseId = '', roleId = '') {
   const role = roles.find(({ id }) => id === roleId);
   const registration = mode === 'registration';
   const roleInterest = mode === 'role';
-  const button = registration ? '保存测试报名' : '保存测试意向';
+  const interestOnly = course?.interestOnly;
+  const button = registration ? '保存测试报名' : interestOnly ? '我有兴趣（演示）' : '保存测试意向';
   const sessionOptions = registration ? course.sessions.map((date) => `<option value="${date}">${date}</option>`).join('') : '';
   showDialog(course?.title || role.title, `
-    <p class="dialog-copy">${course?.description || role.nextStep}</p>
-    ${course ? `<p class="dialog-copy">${course.credential}</p>` : ''}
+    <p class="dialog-copy">${registration ? '请选择示例班次，体验报名、取消和退款。' : course?.description || role.nextStep}</p>
+    ${course?.credential && !registration ? `<p class="dialog-copy">${course.credential}</p>` : ''}
     ${role && course ? `<p class="dialog-copy">对应岗位 · ${role.title}</p>` : ''}
     <form id="preview-form">
-      <p class="demo-note">请使用示例姓名和邮箱。测试记录仅保存在当前浏览器。</p>
-      <label class="field">测试姓名 <input name="name" required maxlength="100" autocomplete="off" placeholder="例如 Test Learner"></label>
-      <label class="field">测试邮箱 <input name="email" type="email" required maxlength="160" autocomplete="off" placeholder="例如 learner@example.com"></label>
+      <p class="demo-note">${interestOnly ? '本次意向仅保存在当前浏览器，不会发送给 ALLCPR。' : '请使用示例姓名和邮箱。测试记录仅保存在当前浏览器。'}</p>
+      ${interestOnly ? '' : `<label class="field">测试姓名 <input name="name" required maxlength="100" autocomplete="off" placeholder="例如 Test Learner"></label>
+      <label class="field">测试邮箱 <input name="email" type="email" required maxlength="160" autocomplete="off" placeholder="例如 learner@example.com"></label>`}
       ${registration ? `<label class="field">演示班次<select name="session" required><option value="">选择示例班次</option>${sessionOptions}</select></label>` : ''}
       ${registration || roleInterest ? '<label class="check"><input name="caredoer" type="checkbox" value="yes">我愿意登记为 CareDoer，并接受后续资格核验。</label>' : ''}
       <p class="form-message" role="status"></p>
@@ -81,7 +86,8 @@ function showForm(mode, courseId = '', roleId = '') {
     event.preventDefault();
     const fields = new FormData(event.currentTarget);
     const message = event.currentTarget.querySelector('.form-message');
-    if (!fields.get('name').trim()) {
+    const name = fields.get('name')?.trim() || '';
+    if (!interestOnly && !name) {
       message.textContent = '请输入测试姓名。';
       return;
     }
@@ -89,8 +95,8 @@ function showForm(mode, courseId = '', roleId = '') {
       const records = readRecords();
       records.push({
         id: String(Date.now()) + '-' + Math.random().toString(36).slice(2),
-        name: fields.get('name').trim(),
-        email: fields.get('email').trim(),
+        name,
+        email: fields.get('email')?.trim() || '',
         courseId, roleId, mode,
         session: fields.get('session') || '',
         caredoer: fields.get('caredoer') === 'yes',
@@ -125,11 +131,13 @@ function showRecords() {
     showDialog('测试记录', '<p>浏览器无法读取本地测试记录。</p>');
     return;
   }
-  showDialog('测试记录', records.length ? `
+  showDialog('测试记录', `
+    <div class="actions"><button class="button button-outline" type="button" data-demo-registration>模拟儿科急救报名</button></div>
+    ${records.length ? `
     <p class="dialog-copy">按课汇总使用班次和报名状态。CareDoer 意向名单只包含勾选意向的记录。</p>
     <div class="actions"><button class="button button-secondary" data-export="summary" type="button">导出按课报名</button><button class="button button-outline" data-export="interest" type="button">导出 CareDoer 意向</button><button class="button button-outline" data-export="all" type="button">导出全部记录</button></div>
     <p id="record-message" class="form-message" role="status"></p><ul class="record-list" id="record-list"></ul>` :
-    '<p>还没有测试记录。可从课程或岗位详情提交一条测试数据。</p>');
+    '<p>还没有测试记录。可从课程或岗位详情提交一条测试数据。</p>'}`);
   if (!records.length) return;
   for (const record of records.slice().reverse()) {
     const item = document.createElement('li');
@@ -229,7 +237,7 @@ get('close-dialog').addEventListener('click', () => dialog.close());
 document.addEventListener('click', (event) => {
   const button = event.target.closest('button');
   if (!button) return;
-  const { filter, role, course, forRole, roleInterest, records, recordId, export: exportKind } = button.dataset;
+  const { filter, role, course, forRole, roleInterest, demoRegistration, records, recordId, export: exportKind } = button.dataset;
   if (filter) {
     activeCategory = filter;
     if (filter !== 'all' && !roles.some((item) => item.id === activeRole && item.category === filter)) {
@@ -248,6 +256,7 @@ document.addEventListener('click', (event) => {
   }
   if (course) showCourse(course, forRole);
   if (roleInterest) showForm('role', '', roleInterest);
+  if (demoRegistration !== undefined) showForm('registration', 'pediatric');
   if (records !== undefined) showRecords();
   if (recordId) advanceRecord(recordId);
   if (exportKind) downloadCsv(exportKind);
